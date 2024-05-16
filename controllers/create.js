@@ -37,7 +37,7 @@ const CreateSubcategory = async (req, res) => {
 				error: 'no category with category id ',
 			});
 		}
-		const subcat = new SubCategory({
+		const subcat = new Subcategory({
 			cat_id: cat_id,
 			name: name,
 			image: image,
@@ -71,6 +71,7 @@ const CreateItem = async (req, res) => {
 			cat_id: cat_id,
 		});
 		if (findsubcat.length === 0) {
+			// the find method for the mongoose model returns an array. if the array length is 0, it means the items weren't found
 			return res.status(400).json({ error: 'invalid details' });
 		}
 		const item = new Item({
@@ -83,7 +84,7 @@ const CreateItem = async (req, res) => {
 			tax,
 			base_amount,
 			discount,
-			total_amount: base_amount - discount,
+			total_amount: base_amount - discount, // as given in the assignment document
 		});
 		const savedItem = await item.save();
 		return res.status(201).json({ item: savedItem });

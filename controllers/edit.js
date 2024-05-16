@@ -7,12 +7,13 @@ const EditCategory = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const data = await Category.find({ _id: id });
+		// checking if the document with the requested id exists
 		if (!data) {
 			return res.status(400).json({ error: 'category doesnt exist' });
 		}
 		const newValue = req.body;
 		const updatedData = await Category.findByIdAndUpdate(id, newValue, {
-			new: true,
+			new: true, // new: true is to return the updated document
 		});
 		return res.status(200).json({ new_category: updatedData });
 	} catch (err) {

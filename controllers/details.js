@@ -7,6 +7,7 @@ const GetCategories = async (req, res) => {
 	try {
 		const data = await Category.find({}).select('name');
 		if (data.length === 0) {
+			// if the array returned by the find() method is empty, it means there is no data
 			return res.status(400).json({ message: 'no categories' });
 		}
 		return res.status(200).json({ all_categories: data });
