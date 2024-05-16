@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const CreateRoutes = require('./routes/create.js');
 const GetRoutes = require('./routes/getdetails.js');
+const EditRoutes = require('./routes/edit.js');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(bodyParser.json());
 app.use('/create', CreateRoutes);
 
 app.use('/', GetRoutes);
+
+app.use('/edit', EditRoutes);
 
 app.get('/', (req, res) => {
 	res.send('hello');
